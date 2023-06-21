@@ -5,6 +5,26 @@ const spanYear = document.getElementById("year");
 const spanWeekday = document.getElementById("weekday");
 
 const todoContainer = document.getElementById('todo-container');
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+    history.go(1);
+};
+
+auth.onAuthStateChanged(user => {
+    if (!user) {
+        redirectToLoginPage();
+    }
+});
+
+function redirectToLoginPage() {
+    // Redirect the user to the login page
+    window.location.href = "login.html";
+}
+
+// Clear browser history to prevent going back to login.html after logout
+if (performance.navigation.type === 1) {
+    history.replaceState(null, null, location.href);
+}
 
 function loadbody() {
     // console.log('body is loaded');
